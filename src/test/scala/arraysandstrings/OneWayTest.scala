@@ -28,4 +28,8 @@ class OneWayTest extends FlatSpec with Matchers {
   it should "return false for two character replacements" in {
     OneWay.isEdit("pale", "bole") should be (false)
   }
+
+  it should "return false for the same string" in {
+    OneWay.isEdit("a", "a") should be (false)
+  }
 }
