@@ -60,6 +60,16 @@ class Node {
         return head;
     }
 
+    public static int size(Node head) {
+        int size = 1;
+        while (head.next != null) {
+            size++;
+            head = head.next;
+        }
+
+        return size;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
