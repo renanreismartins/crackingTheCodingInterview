@@ -9,6 +9,6 @@ class PartitionTest extends FlatSpec with Matchers {
 
     val partitioned = Partition.partition(n, 5);
 
-    partitioned should be(new Node(3, new Node(2, new Node(1, new Node(5, new Node(8, new Node(5, new Node(10))))))))
+    partitioned should be(new Node(1, new Node(2, new Node(3, new Node(5, new Node(8, new Node(5, new Node(10))))))))
   }
 }

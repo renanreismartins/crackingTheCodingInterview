@@ -2,34 +2,20 @@ package linkedlists;
 
 
 public class Partition {
+
     public static Node partition(Node n, int x) {
+        return partition_(n.next, x, new Node(n.data));
+    }
 
-        Node left = null;
-        Node right = null;
+    public static Node partition_(Node n, int x, Node acc) {
 
-        while (n != null) {
-            if (n.data < x) {
-                if (left == null) {
-                    left = new Node(n.data);
-                } else {
-                    left.appendToTail(n.data);
-                }
-            } else {
-                if (right == null) {
-                    right = new Node(n.data);
-                } else {
-                    right.appendToTail(n.data);
-                }
-            }
+        if (n == null) { return acc; }
 
-            n = n.next;
+        if (n.data < x) {
+            acc = new Node(n.data, acc);
+        } else {
+            acc.appendToTail(n.data);
         }
-
-        while (right != null) {
-            left.appendToTail(right.data);
-            right = right.next;
-        }
-
-        return left;
+        return partition_(n.next, x, acc);
     }
 }
