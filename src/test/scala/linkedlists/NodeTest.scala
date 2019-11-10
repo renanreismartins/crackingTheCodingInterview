@@ -28,4 +28,10 @@ class NodeTest extends FlatSpec with Matchers {
     Node.size(new Node(1)) should be (1)
     Node.size(new Node(1, new Node(2))) should be (2)
   }
+
+  it should "reverse the list" in {
+    Node.reverse(new Node(7)) should be (new Node(7))
+    Node.reverse(new Node(7, new Node(1))) should be (new Node(1, new Node(7)))
+    Node.reverse(new Node(7, new Node(1, new Node(6)))) should be (new Node(6, new Node(1, new Node(7))))
+  }
 }
