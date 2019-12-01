@@ -27,15 +27,16 @@ class Node {
     }
 
     public static Node reverse(Node n) {
-        Node last = new Node(KthToLast.KthToLast(n, 0).data);
-        return reverse_(n, last, 1);
+        return reverse_(n, null);
     }
 
-    private static Node reverse_(Node n, Node acc, int pos) {
-        if (pos == Node.size(n)) { return acc; }
+    private static Node reverse_(Node n, Node acc) {
+        if (n == null) {
+            return acc;
+        }
 
-        acc.appendToTail(KthToLast.KthToLast(n, pos).data);
-        return reverse_(n, acc, ++pos);
+        Node head = new Node(n.data, acc);
+        return reverse_(n.next, head);
     }
 
     public static Node deleteNode(Node head, int d) {
