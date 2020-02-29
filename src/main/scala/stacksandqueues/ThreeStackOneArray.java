@@ -7,13 +7,13 @@ public class ThreeStackOneArray {
 
     private final int NUMBER_OF_STACKS = 3;
     private final int stackSize;
-    private int[] values;
+    private Integer[] values;
 
     private Map<Integer, Integer> stackUtilization;
 
     public ThreeStackOneArray(int stackSize) {
         this.stackSize = stackSize;
-        values = new int[stackSize * NUMBER_OF_STACKS];
+        values = new Integer[stackSize * NUMBER_OF_STACKS];
 
         stackUtilization = new HashMap<>();
         stackUtilization.put(0, 0);
@@ -36,7 +36,13 @@ public class ThreeStackOneArray {
         });
     }
 
-    public int pop(int stackNum) {
+    public int pop(int stackNum) throws EmptyStackException {
+        Integer position = stackUtilization.get(stackNum);
+
+        if (position == null || position == 0) {
+            throw new EmptyStackException();
+        }
+
         return 0;
     }
 
@@ -57,7 +63,7 @@ public class ThreeStackOneArray {
     }
 
     // for testing purposes
-    public int[] getValues() {
+    public Integer[] getValues() {
         return values;
     }
 }
