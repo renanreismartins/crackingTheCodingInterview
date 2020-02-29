@@ -17,49 +17,61 @@ public class ThreeStackOneArray {
 
         stackUtilization = new HashMap<>();
         stackUtilization.put(0, 0);
-        stackUtilization.put(1, 3);
-        stackUtilization.put(2, 6);
+        stackUtilization.put(1, 0);
+        stackUtilization.put(2, 0);
     }
 
     public void push(int stackNum, int value) throws FullStackException {
-        Integer position = stackUtilization.get(stackNum);
-
-        if (position == null) {
+        if (isFull(stackNum)) {
             throw new FullStackException();
         }
 
-        values[position] = value;
-        stackUtilization.compute(stackNum, (key, oldValue) -> {
-            Integer newPosition = oldValue + 1;
-
-            return newPosition % stackSize == 0 ? null : newPosition;
-        });
+        Integer positionInsideStack = stackUtilization.get(stackNum);
+        Integer positionInsideGeneralArray = (stackNum * stackSize) + positionInsideStack;
+        values[positionInsideGeneralArray] = value;
+        stackUtilization.compute(stackNum, (key, oldValue) -> oldValue + 1);
     }
 
     public int pop(int stackNum) throws EmptyStackException {
-        Integer position = stackUtilization.get(stackNum);
-
-        if (position == null || position == 0) {
+        if (isEmpty(stackNum)) {
             throw new EmptyStackException();
         }
 
-        return 0;
+        Integer positionInsideStack = stackUtilization.get(stackNum);
+        Integer positionInsideGeneralArray = (stackNum * stackSize) + positionInsideStack - 1;
+
+        Integer value = values[positionInsideGeneralArray];
+        values[positionInsideGeneralArray] = null;
+
+        stackUtilization.compute(stackNum, (key, oldValue) -> oldValue - 1);
+
+        return value;
     }
 
-    public int peek(int stackNum) {
-        return 0;
+    public int peek(int stackNum) throws EmptyStackException {
+        if (isEmpty(stackNum)) {
+            throw new EmptyStackException();
+        }
+
+        Integer positionInsideStack = stackUtilization.get(stackNum);
+        Integer positionInsideGeneralArray = (stackNum * stackSize) + positionInsideStack - 1;
+
+        return values[positionInsideGeneralArray];
     }
 
     public boolean isEmpty(int stackNum) {
-        return false;
+        return stackUtilization.get(stackNum) == 0;
     }
 
     public boolean isFull(int stackNum) {
-        return false;
+        return stackUtilization.get(stackNum) == stackSize;
     }
 
-    private int indexOfTop(int stackNum) {
-        return 0;
+    public int indexOfTop(int stackNum) {
+        Integer positionInsideStack = stackUtilization.get(stackNum);
+        Integer positionInsideGeneralArray = (stackNum * stackSize) + positionInsideStack - 1;
+
+        return positionInsideGeneralArray;
     }
 
     // for testing purposes
