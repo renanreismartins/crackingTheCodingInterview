@@ -16,9 +16,9 @@ public class ThreeStackOneArray {
         values = new Integer[stackSize * NUMBER_OF_STACKS];
 
         stackUtilization = new HashMap<>();
-        stackUtilization.put(1, 0);
-        stackUtilization.put(2, 3);
-        stackUtilization.put(3, 6);
+        stackUtilization.put(0, 0);
+        stackUtilization.put(1, 3);
+        stackUtilization.put(2, 6);
     }
 
     public void push(int stackNum, int value) throws FullStackException {
@@ -39,19 +39,11 @@ public class ThreeStackOneArray {
     public int pop(int stackNum) throws EmptyStackException {
         Integer position = stackUtilization.get(stackNum);
 
-        //TODO THIS IS WRONG BECAUSE position == null can be that the stack is full, and position == 0 is because it is the first element of first stack;
-        // REFACTOR how to check if the stack is full or empty then refactor push and only then implement this
         if (position == null || position == 0) {
             throw new EmptyStackException();
         }
 
-
         return 0;
-//        stackUtilization.compute(stackNum, (key, oldValue) -> oldValue - 1);
-//        Integer value = values[position];
-//        values[position] = null;
-//
-//        return value;
     }
 
     public int peek(int stackNum) {

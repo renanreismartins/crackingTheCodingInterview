@@ -8,33 +8,37 @@ class ThreeStackOneArrayTest extends FlatSpec with Matchers {
 
   it should "add two elements to stacks" in {
     val stacks = new ThreeStackOneArray(3)
+    stacks.push(0, 1)
+    stacks.push(0, 2)
     stacks.push(1, 1)
     stacks.push(1, 2)
     stacks.push(2, 1)
     stacks.push(2, 2)
-    stacks.push(3, 1)
-    stacks.push(3, 2)
 
     stacks.getValues should be(Array[Integer](1, 2, null, 1, 2, null, 1, 2, null))
   }
 
   it should "fill the stacks" in {
     val stacks = new ThreeStackOneArray(3)
+    stacks.push(0, 1)
+    stacks.push(0, 2)
+    stacks.push(0, 3)
     stacks.push(1, 1)
     stacks.push(1, 2)
     stacks.push(1, 3)
     stacks.push(2, 1)
     stacks.push(2, 2)
     stacks.push(2, 3)
-    stacks.push(3, 1)
-    stacks.push(3, 2)
-    stacks.push(3, 3)
 
     stacks.getValues should be(Array[Int](1, 2, 3, 1, 2, 3, 1, 2, 3))
   }
 
   it should "add throws when adding more elements than allowed the stacks" in {
     val stacks = new ThreeStackOneArray(3)
+    stacks.push(0, 1)
+    stacks.push(0, 2)
+    stacks.push(0, 3)
+
     stacks.push(1, 1)
     stacks.push(1, 2)
     stacks.push(1, 3)
@@ -43,9 +47,9 @@ class ThreeStackOneArrayTest extends FlatSpec with Matchers {
     stacks.push(2, 2)
     stacks.push(2, 3)
 
-    stacks.push(3, 1)
-    stacks.push(3, 2)
-    stacks.push(3, 3)
+    assertThrows[FullStackException] {
+      stacks.push(0, 4)
+    }
 
     assertThrows[FullStackException] {
       stacks.push(1, 4)
@@ -54,10 +58,6 @@ class ThreeStackOneArrayTest extends FlatSpec with Matchers {
     assertThrows[FullStackException] {
       stacks.push(2, 4)
     }
-
-    assertThrows[FullStackException] {
-      stacks.push(3, 4)
-    }
   }
 
 
@@ -65,7 +65,7 @@ class ThreeStackOneArrayTest extends FlatSpec with Matchers {
     val stacks = new ThreeStackOneArray(3)
 
     assertThrows[EmptyStackException] {
-      stacks.pop(1)
+      stacks.pop(0)
     }
   }
 
