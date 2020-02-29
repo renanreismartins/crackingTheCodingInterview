@@ -4,7 +4,7 @@ import org.scalatest.{FlatSpec, Matchers}
 
 class LoopDetectionTest extends FlatSpec with Matchers {
 
-  it should "calculate the kth to last" in {
+  it should "should find the element that causes the loop" in {
     val e = new Node(5)
     val d = new Node(4, e)
     val c = new Node(3, d)
