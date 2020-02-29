@@ -26,8 +26,7 @@ public class ThreeStackOneArray {
             throw new FullStackException();
         }
 
-        Integer positionInsideStack = stackUtilization.get(stackNum);
-        Integer positionInsideGeneralArray = (stackNum * stackSize) + positionInsideStack;
+        Integer positionInsideGeneralArray = indexOfTop(stackNum) + 1;
         values[positionInsideGeneralArray] = value;
         stackUtilization.compute(stackNum, (key, oldValue) -> oldValue + 1);
     }
@@ -37,9 +36,7 @@ public class ThreeStackOneArray {
             throw new EmptyStackException();
         }
 
-        Integer positionInsideStack = stackUtilization.get(stackNum);
-        Integer positionInsideGeneralArray = (stackNum * stackSize) + positionInsideStack - 1;
-
+        Integer positionInsideGeneralArray = indexOfTop(stackNum);
         Integer value = values[positionInsideGeneralArray];
         values[positionInsideGeneralArray] = null;
 
@@ -52,11 +49,7 @@ public class ThreeStackOneArray {
         if (isEmpty(stackNum)) {
             throw new EmptyStackException();
         }
-
-        Integer positionInsideStack = stackUtilization.get(stackNum);
-        Integer positionInsideGeneralArray = (stackNum * stackSize) + positionInsideStack - 1;
-
-        return values[positionInsideGeneralArray];
+        return values[indexOfTop(stackNum)];
     }
 
     public boolean isEmpty(int stackNum) {

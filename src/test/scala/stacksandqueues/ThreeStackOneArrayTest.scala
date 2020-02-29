@@ -120,6 +120,7 @@ class ThreeStackOneArrayTest extends FlatSpec with Matchers {
     stacks.push(1, 2)
 
     stacks.indexOfTop(1) should be (4)
+
   }
 
 
